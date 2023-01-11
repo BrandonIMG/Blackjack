@@ -1,0 +1,31 @@
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+body{
+    background-color: #2f4f30!important;
+    color: #fff;
+}
+h1,h2,h3{
+    color: #fff;
+    font-size: 30px;
+}
+.header{
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    font-size: 25px;
+}
+.carta{
+    position: relative;
+    left: 100px;
+    width: 150px;
+    margin-left: -75px;
+
+}
+#compudora-cartas, #jugador-cartas{
+    height: 240px;
+}
