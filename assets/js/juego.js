@@ -15,6 +15,7 @@ let puntosJugador = 0,
 //Referencias del HTML
 const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
+const btnNuevo = document.querySelector('#btnNuevo');
 const puntaje = document.querySelectorAll('small');
 const cartasJugador = document.querySelector('#jugador-cartas');
 const cartasComputador = document.querySelector('#computador-cartas');
@@ -78,6 +79,20 @@ const turnoComputadora = (puntosMinimos) => {
             break;
         }
     }while((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
+
+    setTimeout(() => {
+        if(puntosComputadora === puntosMinimos){
+            alert('Nadie gana');
+        }else if(puntosMinimos > 21){
+            alert('computadora gana');
+        }else if(puntosComputadora > 21){
+            alert('jugador gana')
+        }else if (puntosComputadora < puntosJugador){
+            alert('computadora gana');
+        }else if(puntosComputadora > puntosJugador){
+            alert('jugador gana');
+        }
+    }, 10);
 }
 //Eventos
 btnPedir.addEventListener('click', () => {
@@ -92,10 +107,12 @@ btnPedir.addEventListener('click', () => {
     if(puntosJugador > 21 ){
         console.warn('Perdiste');
         btnPedir.disabled = true ;
+        btnDetener.disabled = true;
         turnoComputadora(puntosJugador);
     }else if(puntosJugador === 21){
         console.warn('21, ganaste');
         turnoComputadora(puntosJugador);
+        btnDetener.disabled = true;
     }
     
 })
@@ -104,4 +121,19 @@ btnDetener.addEventListener('click', () => {
     btnPedir.disabled = true;
     btnDetener.disabled = true;
     turnoComputadora(puntosJugador);
+})
+
+btnNuevo.addEventListener('click', () => {
+    deck = crearDeck();
+    console.log(deck);
+    puntosJugador = 0;
+    puntosComputadora = 0;
+    puntaje.forEach(puntos =>{
+        puntos.innerHTML = '0';
+    })
+    cartasComputador.innerHTML = '';
+    cartasJugador.innerHTML = '';
+
+    btnPedir.disabled = false;
+    btnDetener.disabled = false;
 })
